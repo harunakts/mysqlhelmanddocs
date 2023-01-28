@@ -1,11 +1,11 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: mysql-pv-claim
+  name: {{ .Values.appname }}-pv-claim
 spec:
-  storageClassName: manual
+  storageClassName: {{ .Values.storageclassname }}
   accessModes:
-    - ReadWriteOnce
+    - {{ .Values.storageaccessmodes }}
   resources:
     requests:
-      storage: 20Gi
+      storage: {{ .Values.volumestorage }}

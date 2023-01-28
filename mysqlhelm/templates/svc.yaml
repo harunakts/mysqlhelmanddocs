@@ -4,7 +4,7 @@ metadata:
   name: {{ .Values.appname }}
   namespace: {{ .Values.namespace }}
 spec:
-  type: LoadBalancer
+  type: {{ .Values.svctype }}
   ports:
   - port: 3306
   selector:

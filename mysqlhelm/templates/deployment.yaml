@@ -22,7 +22,7 @@ spec:
         env:
           # Use secret in real usage
         - name: MYSQL_ROOT_PASSWORD
-          value: testdeneme
+          value: {{ .Values.rootpassword }}
         command: ["/bin/bash"]
         args: ["-c", "service mysql restart && sleep 5 && /var/lib/mysql/sifredegis.sh $MYSQL_ROOT_PASSWORD && if [ -f /var/lib/mysql/test ]; then echo 'dosya zaten var'; else mysql -u root -e 'create database harunakts; use harunakts; CREATE TABLE harun (id INT AUTO_INCREMENT PRIMARY KEY,sayi INT NOT NULL); INSERT INTO harun (sayi) VALUES (5);'; touch /var/lib/mysql/test; fi && tail -1000f /var/log/mysql/error.log"]
         #imagePullPolicy: IfNotPresent
@@ -38,4 +38,4 @@ spec:
       volumes:
       - name: mysql-persistent-storage
         persistentVolumeClaim:
-          claimName: mysql-pv-claim
+          claimName: {{ .Values.appname }}-pv-claim

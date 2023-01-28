@@ -1,14 +1,14 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: mysql-pv-volume
+  name: {{ .Values.appname }}-pv-volume
   labels:
     type: local
 spec:
-  storageClassName: manual
+  storageClassName: {{ .Values.storageclassname }}
   capacity:
-    storage: 20Gi
+    storage: {{ .Values.volumestorage }}
   accessModes:
-    - ReadWriteOnce
+    - {{ .Values.volumesaccessmodes }}
   hostPath:
-    path: "/mnt/data"
+    path: {{ .Values.volumepath }}
