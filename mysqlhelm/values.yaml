@@ -13,7 +13,7 @@ volumepath: "/mnt/mysqlharundata"
 
 storageclassname: manual
 
-storageaccessmodes: ReadWriteOnce
+volumesaccessmodes: ReadWriteOnce
 
 svctype: LoadBalancer
 
