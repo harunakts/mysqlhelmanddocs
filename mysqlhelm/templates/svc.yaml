@@ -4,8 +4,9 @@ metadata:
   name: {{ .Values.appname }}
   namespace: {{ .Values.namespace }}
 spec:
+  type: LoadBalancer
   ports:
   - port: 3306
   selector:
     app: {{ .Values.appname }}
-  clusterIP: None
+  #clusterIP: None
