@@ -1,0 +1,27 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ .Values.appname }}-ing
+  namespace: {{ .Values.namespace }}
+  labels:
+    app.kubernetes.io/name: ingress-nginx
+    app.kubernetes.io/part-of: ingress-nginx
+  annotations:
+    kubernetes.io/ingress.class: nginx
+spec:
+  #SSL Sertifikan için alt yapı
+  #tls:
+  #- hosts:
+  #    - {{ .Values.domain }}
+  #  secretName: {{ .Values.appname }}-tls
+  rules:
+  - host: {{ .Values.domain }}
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: {{ .Values.appname }}-svc
+            port:
+              number: 3000

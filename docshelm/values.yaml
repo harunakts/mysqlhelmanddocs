@@ -1,0 +1,23 @@
+replicas: 1
+
+appname: docs
+
+namespace: default
+
+domain: harunaktasodev.com
+
+pdb:
+  enabled: false
+
+hpa:
+  enabled: false
+
+image:
+  repository: harunakts94/harunaktasodev
+  tag: "latest"
+
+limit:
+  memory: 2048Mi
+  cpu: 2000m
+certificate: []
+key: []

@@ -1,0 +1,10 @@
+#replicas:
+
+appname: mysql
+
+namespace: default
+
+image:
+  repository: mysql
+  #name:
+  tag: "5.6"

@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.appname }}
+  namespace: {{ .Values.namespace }}
+spec:
+  replicas: {{ .Values.replicas }}
+  selector:
+    matchLabels:
+      app: {{ .Values.appname }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.appname }}
+    spec:
+      containers:
+      - name: {{ .Values.appname }}
+        imagePullPolicy: IfNotPresent
+        image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+        envFrom:
+        - configMapRef:
+            name: {{ .Values.appname }}-config
+        ports:
+        - name: http
+          containerPort: 3000
+        lifecycle:
+          preStop:
+            exec:
+              command: ["sleep","90"]
+        resources:
+          limits:
+            memory: {{ .Values.limit.memory }}
+            cpu: {{ .Values.limit.cpu }}
+      #imagePullSecrets:
+       # - name: secret-name ismi eğer private bir imaj var ise
